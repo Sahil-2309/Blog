@@ -15,7 +15,7 @@ module.exports = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
         'gradient-to-45':
-          'linear-gradient(71deg, rgba(0, 255, 0, 0), gray, rgba(0, 255, 0, 0))',
+          'linear-gradient(55deg, rgba(0, 255, 0, 0), gray, rgba(0, 255, 0, 0))',
       },
     },
   },

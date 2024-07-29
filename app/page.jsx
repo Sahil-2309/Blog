@@ -20,19 +20,19 @@ export default function Home() {
         <title>Blogging Website</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <div className='grid grid-cols-1 lg:grid-cols-12 gap-12'>
+      <div className='grid grid-cols-1 lg:grid-cols-12 gap-8'>
         <motion.div
-          initial={{ y: 400 }} // Set the initial position
+          initial={{ y: 400 }}
           animate={{ y: 0 }}
           transition={{ duration: 0.65 }}
-          className='lg:col-span-8 col-span-1 grid grid-cols-1 md:grid-cols-2 gap-8'
+          className='lg:col-span-9 col-span-1 grid grid-cols-1 md:grid-cols-2 gap-8'
         >
           {posts.map((post, index) => (
             <PostCards key={index} post={post.node} />
           ))}
         </motion.div>
 
-        <div className='lg:col-span-4 col-span-1'>
+        <div className='lg:col-span-3 col-span-1'>
           <div className='lg:sticky top-8'>
             <PostWidget />
             <Categories />

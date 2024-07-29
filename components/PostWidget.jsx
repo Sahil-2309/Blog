@@ -3,21 +3,56 @@ import React, { use } from 'react'
 import moment from 'moment'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
-import { getRecentPosts } from '../services'
-const PostWidget = () => {
+import { getRecentPosts, getSimilarPosts } from '../services'
+const PostWidget = ({ categories, slug }) => {
   const [posts, setPosts] = useState([])
+  const [relatedPosts, setRelatedPosts] = useState([])
+
   useEffect(() => {
-    getRecentPosts().then((data) => {
-      setPosts(data)
-    })
-  }, [])
-  console.log(posts)
+    if (slug) {
+      getSimilarPosts(category, slug).then((data) => setRelatedPosts(data))
+    } else {
+      getRecentPosts().then((data) => {
+        setPosts(data)
+      })
+    }
+  }, [slug])
+  // console.log(posts)
+  // console.log(relatedPosts)
   return (
     <div
-      className='text-white
+      className='bg-gradient-to-45 shadow-lg rounded-lg p-8 mb-8
+      text-white border
   '
     >
-      PostWidget
+      <h3 className='text-xl mb-8 font-semibold border-b pb-4'>
+        {slug ? 'Related Posts' : 'Recent Posts'}
+      </h3>
+      {posts.map((post) => (
+        <div key={post.title} className='flex items-center w-full mb-4 '>
+          <div className='w-16 flex-none'>
+            <img
+              src={post.featuredImage.url}
+              alt={post.title}
+              height='60px'
+              width='60px'
+              className='align-middle rounded-full'
+            />
+          </div>
+          <div className='flex-grow ml-4'>
+            <p className='text-gray-200 font-xs'>
+              {moment(post.createdAt).format('MMM DD, YYYY')}
+            </p>
+            <Link
+              href={`/post/${post.slug}`}
+              key={post.title}
+              className='text-md'
+            >
+              {post.title}
+            </Link>
+          </div>
+        </div>
+      ))}
     </div>
   )
 }

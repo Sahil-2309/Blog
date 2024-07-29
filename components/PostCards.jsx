@@ -14,14 +14,14 @@ const Postcards = ({ post }) => {
         <img
           src={post.featuredImage.url}
           alt={post.title}
-          className='object-center w-full h-80 object-cover shadow-lg rounded-t-lg lg:rounded-lg'
+          className='object-center w-full h-80 object-cover shadow-lg rounded-t-lg lg:rounded-lg overflow-hidden'
         />
       </div>
       <h1 className='transition duration-700 text-center mb-4 cursor-pointer hover:text-pink-600 text-3xl font-semibold text-white'>
         <Link href={`/post/${post.slug}`}>{post.title}</Link>
       </h1>
       <div className='block lg:flex text-center items-center justify-center mb-2 w-full '>
-        <div className='flex items-center justify-center mb-2 lg:mb-0 w-full lg:w-auto mr-4 text-gray-400'>
+        <div className='flex items-center justify-center mb-2 lg:mb-0 w-full lg:w-auto mr-4 text-gray-200'>
           <img
             alt={post.author.name}
             height='20px'
@@ -33,7 +33,7 @@ const Postcards = ({ post }) => {
             {post.author.name}
           </span>
         </div>
-        <div className='font-medium text-gray-400 '>
+        <div className='font-medium text-gray-200 '>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             className='h-6 w-6 inline mr-2 text-pink-500'

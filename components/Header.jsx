@@ -1,15 +1,16 @@
 'use client'
-import React, { useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-const categories = [
-  { name: 'React', slug: 'react' },
-  { name: 'Vue', slug: 'vue' },
-  { name: 'Angular', slug: 'angular' },
-  { name: 'Svelte', slug: 'svelte' },
-]
+import { getCategories } from '../services'
 
 const Header = () => {
+  const [categories, setCategories] = useState([])
+  useEffect(() => {
+    getCategories().then((data) => {
+      setCategories(data)
+    })
+  }, [])
   return (
     <motion.div
       initial={{ y: -200 }} // Set the initial position
