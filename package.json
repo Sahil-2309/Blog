@@ -18,6 +18,7 @@
     "react-dom": "^18",
     "react-multi-carousel": "^2.8.5",
     "react-parser": "^1.0.0",
+    "reading-time-estimator": "^1.11.0",
     "sass": "^1.77.8",
     "util": "^0.12.5"
   },

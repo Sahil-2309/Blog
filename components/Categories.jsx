@@ -10,7 +10,7 @@ const Categories = () => {
       setCategories(data)
     })
   }, [])
-  console.log(categories)
+  // console.log(categories)
   return (
     <div
       className='bg-gradient-to-45 shadow-lg rounded-lg p-8 mb-8

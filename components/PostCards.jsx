@@ -1,14 +1,17 @@
-import React from 'react'
+'use client'
+import React, { useState, useEffect } from 'react'
 import moment from 'moment'
 import Link from 'next/link'
-
+import logo from '../public/bg.jpg'
+import { animate } from 'framer-motion'
 const Postcards = ({ post }) => {
-  // console.log(post.author.photo.url)
+  const [isAnimating, setIsAnimating] = useState(false)
+  // console.log(post.featuredImage.url)
   return (
     <div
-      className='transition duration-700 shadow-lg bg-opacity-95
-    bg-gradient-to-45 from-transparent via-gray-600 to-transparent 
-     rounded-lg p-0 lg:p-8 pb-8 mb-4 rounded-md  backdrop-filter backdrop-blur-md border border-gray-500 select-none '
+      className='Card transition duration-700 shadow-lg bg-opacity-95
+    bg-gradient-to-45
+     rounded-lg p-0 lg:p-8 pb-8 mb-4 rounded-md backdrop-filter backdrop-blur-md border border-gray-500 select-none '
     >
       <div className='relative overflow-hidden shadow-md mb-6'>
         <img

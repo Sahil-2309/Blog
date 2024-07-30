@@ -1,6 +1,6 @@
 'use client'
 import Head from 'next/head'
-import { PostCards, PostWidget, Categories } from '../components'
+import { PostCards, PostWidget } from '../components'
 import { motion } from 'framer-motion'
 import { getPosts } from '../services'
 import { useEffect, useState } from 'react'
@@ -24,18 +24,18 @@ export default function Home() {
         <motion.div
           initial={{ y: 400 }}
           animate={{ y: 0 }}
-          transition={{ duration: 0.65 }}
+          transition={{ duration: 0.85, ease: 'easeInOut' }}
           className='lg:col-span-9 col-span-1 grid grid-cols-1 md:grid-cols-2 gap-8'
         >
-          {posts.map((post, index) => (
-            <PostCards key={index} post={post.node} />
-          ))}
+          {posts.length > 0 &&
+            posts.map((post, index) => (
+              <PostCards key={index} post={post.node} />
+            ))}
         </motion.div>
 
         <div className='lg:col-span-3 col-span-1'>
           <div className='lg:sticky top-8'>
             <PostWidget />
-            <Categories />
           </div>
         </div>
       </div>

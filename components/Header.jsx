@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { getCategories } from '../services'
-
 const Header = () => {
   const [categories, setCategories] = useState([])
   useEffect(() => {
@@ -13,14 +12,14 @@ const Header = () => {
   }, [])
   return (
     <motion.div
-      initial={{ y: -200 }} // Set the initial position
+      initial={{ y: -200 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.45 }} // Optional: Add transition duration
+      transition={{ duration: 0.85, ease: 'easeInOut' }}
       className='container mx-auto px-10 mb-8 sticky'
     >
       <div className='border-b w-full inline-block border-black-300 py-8'>
         <div className='md:float-left block'>
-          <Link href='/'>
+          <Link href='/' className='flex items-center w-full'>
             <span className='cursor-pointer font-bold text-4xl text-white'>
               CloudLearn
             </span>

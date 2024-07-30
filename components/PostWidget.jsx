@@ -2,25 +2,27 @@
 import React, { use } from 'react'
 import moment from 'moment'
 import Link from 'next/link'
+import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import { getRecentPosts, getSimilarPosts } from '../services'
 const PostWidget = ({ categories, slug }) => {
   const [posts, setPosts] = useState([])
   const [relatedPosts, setRelatedPosts] = useState([])
-
   useEffect(() => {
     if (slug) {
-      getSimilarPosts(category, slug).then((data) => setRelatedPosts(data))
+      getSimilarPosts(categories, slug).then((data) => setPosts(data))
     } else {
       getRecentPosts().then((data) => {
         setPosts(data)
       })
     }
   }, [slug])
-  // console.log(posts)
-  // console.log(relatedPosts)
+  console.log(posts)
   return (
-    <div
+    <motion.div
+      initial={{ x: 400 }}
+      animate={{ x: 0 }}
+      transition={{ duration: 0.85 }}
       className='bg-gradient-to-45 shadow-lg rounded-lg p-8 mb-8
       text-white border
   '
@@ -46,14 +48,15 @@ const PostWidget = ({ categories, slug }) => {
             <Link
               href={`/post/${post.slug}`}
               key={post.title}
-              className='text-md'
+              className='text-md transition duration-700
+hover:text-pink-600'
             >
               {post.title}
             </Link>
           </div>
         </div>
       ))}
-    </div>
+    </motion.div>
   )
 }
 
