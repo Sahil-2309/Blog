@@ -1,5 +1,7 @@
 import { GraphQlClient, qgl } from 'graphql'
+
 const graphqlAPI = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT
+
 export default async function comments(req, res) {
   const graphqlClient = new GraphQlClient(graphqlAPI, {
     headers: {

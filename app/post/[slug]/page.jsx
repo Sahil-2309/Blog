@@ -17,13 +17,13 @@ const PostDetails = ({ params }) => {
     const fetchData = async () => {
       const data = await getPostDetails(params.slug)
       setPost(data)
-      console.log(data)
+      // console.log(data)
       setCategories(data.category.map((category) => category.slug))
     }
     void fetchData()
   }, [params])
   // console.log(post)
-  console.log(post?.featuredImage?.url || '')
+  // console.log(post?.featuredImage?.url || '')
   return (
     <div className='container mx-auto px-10 mb-8'>
       <div className='grid grid-cols-1 lg:grid-cols-12 gap-12'>
