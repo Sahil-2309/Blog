@@ -30,7 +30,7 @@ const PostDetails = ({ params }) => {
       setFeaturedPosts(data.posts)
     })
   }, [params])
-  console.log('posts', post)
+  // console.log('posts', post)
   return (
     // console.log('fpost', featuredPosts),
     <div className='container mx-auto px-10 mb-8'>
