@@ -8,38 +8,47 @@ import {
   Comments,
   CommentsForm,
 } from '../../../components'
-import { getPosts, getPostDetails } from '../../../services'
-
+import { getPosts, getPostDetails, getFeaturedPosts } from '../../../services'
+import { getComments } from '../../../services'
 const PostDetails = ({ params }) => {
   const [categories, setCategories] = useState([])
   const [post, setPost] = useState([])
+  const [comments, setComments] = useState([])
+  const [featuredPosts, setFeaturedPosts] = useState([])
   useEffect(() => {
-    const fetchData = async () => {
-      const data = await getPostDetails(params.slug)
-      setPost(data)
-      // console.log(data)
-      setCategories(data.category.map((category) => category.slug))
-    }
-    void fetchData()
+    getPostDetails(params.slug)
+      .then((data) => {
+        setPost(data)
+      })
+      .catch((error) => {
+        console.error('Error fetching post details:', error)
+      })
+    getComments(params.slug).then((result) => {
+      setComments(result)
+    })
+    getFeaturedPosts().then((data) => {
+      setFeaturedPosts(data.posts)
+    })
   }, [params])
-  // console.log(post)
-  // console.log(post?.featuredImage?.url || '')
+  console.log('posts', post)
   return (
+    // console.log('fpost', featuredPosts),
     <div className='container mx-auto px-10 mb-8'>
       <div className='grid grid-cols-1 lg:grid-cols-12 gap-12'>
-        <div className='col-span-1 lg:col-span-8 text-white'>
+        <div key='post-details' className='col-span-1 lg:col-span-8 text-white'>
           <PostDetail post={post} />
 
-          <CommentsForm slug={post.slug} />
-          {/* <Comments slug={post.slug} /> */}
+          <CommentsForm key='comments-form' slug={post.slug} />
         </div>
-        <div className='col-span-1 lg:col-span-4'>
+        <div key='sidebar' className='col-span-1 lg:col-span-4'>
           <div className='relative lg:sticky top-8'>
-            <Author author={post.author} />
-            <PostWidget
-              slug={post?.slug || 'netsuite'}
-              categories={categories || []}
-            />
+            <Author key='author' author={post.author} />
+            {/* <PostWidget
+              key='post-widget'
+              categories={post.category.map((cat) => cat.slug)}
+              slug={post.slug}
+            /> */}
+            <Comments key='comments' comments={comments} />
           </div>
         </div>
       </div>

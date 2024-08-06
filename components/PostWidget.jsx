@@ -6,6 +6,7 @@ import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
 import { getRecentPosts, getSimilarPosts } from '../services'
 const PostWidget = ({ categories, slug }) => {
+  console.log(categories)
   const [posts, setPosts] = useState([])
   const [relatedPosts, setRelatedPosts] = useState([])
   useEffect(() => {

@@ -1,11 +1,12 @@
-import { GraphQlClient, qgl } from 'graphql'
+import { GraphQLClient, gql } from 'graphql-request' // Corrected import statements
 
 const graphqlAPI = process.env.NEXT_PUBLIC_GRAPHCMS_ENDPOINT
+const token = process.env.GRAPHCMS_TOKEN
 
-export default async function comments(req, res) {
-  const graphqlClient = new GraphQlClient(graphqlAPI, {
+export default async function POST(req, res) {
+  const graphqlClient = new GraphQLClient(graphqlAPI, {
     headers: {
-      authorization: `Bearer ${process.env.GRAPHCMS_TOKEN}`,
+      authorization: `Bearer ${token}`, // Use the correct environment variable
     },
   })
 
@@ -28,6 +29,12 @@ export default async function comments(req, res) {
       }
     }
   `
-  const result = await graphqlClient.request(query, req.body)
-  return res.status(200).send(result)
+
+  try {
+    const result = await graphqlClient.request(query, req.body)
+    return res.status(200).send(result)
+  } catch (error) {
+    console.error('Error executing GraphQL mutation:', error)
+    return res.status(500).send('Internal server error')
+  }
 }

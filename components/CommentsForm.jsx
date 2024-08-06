@@ -61,7 +61,7 @@ const CommentsForm = ({ slug }) => {
       storeData: formData.storeData,
       slug,
     }
-
+    // console.log(commentData.slug)
     if (commentData.storeData) {
       window.localStorage.setItem('name', commentData.name)
       window.localStorage.setItem('email', commentData.email)
@@ -70,8 +70,15 @@ const CommentsForm = ({ slug }) => {
       window.localStorage.removeItem('email')
     }
 
-    submitComment(commentData).then((res) => {
-      setShowSuccessMessage(true)
+    submitComment(
+      commentData.name,
+      commentData.comment,
+      commentData.email,
+      commentData.slug
+    ).then((res) => {
+      if (res) {
+        setShowSuccessMessage(true)
+      }
       setTimeout(() => {
         setShowSuccessMessage(false)
       }, 3000)

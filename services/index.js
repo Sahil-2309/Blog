@@ -32,7 +32,6 @@ const getPosts = async () => {
       }
     }
   `
-
   const result = await request(graphqlAPI, query)
   // console.log(result)
   return result.postsConnection.edges
@@ -91,7 +90,6 @@ const getCategories = async () => {
   return result.categories
 }
 const getPostDetails = async (slug) => {
-  // console.log(slug)
   const query = gql`
     query MyQuery($slug: String!) {
       post(where: { slug: $slug }) {
@@ -125,11 +123,67 @@ const getPostDetails = async (slug) => {
   const result = await request(graphqlAPI, query, { slug })
   return result.post
 }
-export const submitComment = async (comment) => {
-  const result = await fetch('../app/api/comments.js', {
-    method: 'POST',
-    body: JSON.stringify(comment),
-  })
+const submitComment = async (name, comment, email, slug) => {
+  const query =
+    gql`
+    mutation CreateComment {
+      createComment(
+        data: {
+          name: "` +
+    name +
+    `"
+          email: "` +
+    email +
+    `"
+          comment: "` +
+    comment +
+    `"
+          post: { connect: { slug: "` +
+    slug +
+    `" } }
+        }
+      ) {
+        id
+      }
+    }
+  `
+  const data = await request(graphqlAPI, query)
+  return data
+}
+const getComments = async (slug) => {
+  const query = gql`
+    query GetComments($slug: String!) {
+      comments(where: { post: { slug: $slug } }) {
+        name
+        comment
+        createdAt
+      }
+    }
+  `
+  const result = await request(graphqlAPI, query, { slug })
+  return result.comments
+}
+const getFeaturedPosts = async () => {
+  const query = gql`
+    query MyQuery {
+      posts(where: { featuredPost: true }) {
+        author {
+          name
+          photo {
+            url
+          }
+        }
+        featuredImage {
+          url
+        }
+        title
+        slug
+        createdAt
+      }
+    }
+  `
+  const result = await request(graphqlAPI, query)
+  return result
 }
 export {
   getPosts,
@@ -137,4 +191,7 @@ export {
   getSimilarPosts,
   getCategories,
   getPostDetails,
+  submitComment,
+  getComments,
+  getFeaturedPosts,
 }

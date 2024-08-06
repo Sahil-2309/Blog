@@ -1,5 +1,4 @@
 import React from 'react'
-
 import moment from 'moment'
 
 const PostDetail = ({ post }) => {
@@ -62,7 +61,6 @@ const PostDetail = ({ post }) => {
         return modifiedText
     }
   }
-
   return (
     <div className='bg-gradient-to-45 p-3 backdrop-filter backdrop-blur-md rounded-lg'>
       <div className=' rounded-lg lg:p-8 backdrop-filter backdrop-blur-lg '>
@@ -75,7 +73,10 @@ const PostDetail = ({ post }) => {
         </div>
         <div className='px-4 lg:px-0'>
           <div className='flex items-center mb-8 w-full'>
-            <div className='hidden md:flex items-center justify-center lg:mb-0 lg:w-auto mr-8 items-center'>
+            <a
+              href={post?.author?.linkedin}
+              className='hidden md:flex items-center justify-center lg:mb-0 lg:w-auto mr-8 items-center'
+            >
               <img
                 alt={post?.author?.name}
                 height='30px'
@@ -86,7 +87,7 @@ const PostDetail = ({ post }) => {
               <p className='inline align-middle text-gray-300 ml-2 font-medium text-lg'>
                 {post?.author?.name}
               </p>
-            </div>
+            </a>
             <div className='font-medium text-gray-300 align-right'>
               <svg
                 xmlns='http://www.w3.org/2000/svg'

@@ -4,6 +4,7 @@ import { PostCards, PostWidget } from '../components'
 import { motion } from 'framer-motion'
 import { getPosts } from '../services'
 import { useEffect, useState } from 'react'
+import FeaturedPost from '../sections/FeaturedPost'
 // import Template from './template'
 export default function Home() {
   const [posts, setPosts] = useState([])
@@ -20,6 +21,7 @@ export default function Home() {
         <title>Blogging Website</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
+      <FeaturedPost />
       <div className='grid grid-cols-1 lg:grid-cols-12 gap-8'>
         <motion.div
           initial={{ y: 400 }}
