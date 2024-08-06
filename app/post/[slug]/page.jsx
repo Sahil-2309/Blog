@@ -10,11 +10,13 @@ import {
 } from '../../../components'
 import { getPosts, getPostDetails, getFeaturedPosts } from '../../../services'
 import { getComments } from '../../../services'
+
 const PostDetails = ({ params }) => {
   const [categories, setCategories] = useState([])
   const [post, setPost] = useState([])
   const [comments, setComments] = useState([])
   const [featuredPosts, setFeaturedPosts] = useState([])
+
   useEffect(() => {
     getPostDetails(params.slug)
       .then((data) => {
@@ -30,19 +32,24 @@ const PostDetails = ({ params }) => {
       setFeaturedPosts(data.posts)
     })
   }, [params])
-  // console.log('posts', post)
+
   return (
-    // console.log('fpost', featuredPosts),
     <div className='container mx-auto px-10 mb-8'>
-      <div className='grid grid-cols-1 lg:grid-cols-12 gap-12'>
+      <div className='grid grid-cols-1 lg:grid-cols-12 lg:gap-12'>
         <div key='post-details' className='col-span-1 lg:col-span-8 text-white'>
           <PostDetail post={post} />
 
+          {/* Render Author above CommentsForm on smaller screens */}
+          <div className='lg:hidden mb-8'>
+            <Author key='author' author={post.author} />
+          </div>
           <CommentsForm key='comments-form' slug={post.slug} />
         </div>
         <div key='sidebar' className='col-span-1 lg:col-span-4'>
           <div className='relative lg:sticky top-8'>
-            <Author key='author' author={post.author} />
+            <div className='hidden lg:block'>
+              <Author key='author' author={post.author} />
+            </div>
             {/* <PostWidget
               key='post-widget'
               categories={post.category.map((cat) => cat.slug)}
